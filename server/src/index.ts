@@ -33,7 +33,7 @@ app.get("/decks", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Muie la cai");
+  res.send("Success!");
 });
 
 // Database connection
