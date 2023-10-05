@@ -1,3 +1,4 @@
+import cors from "cors";
 import { config } from "dotenv";
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
@@ -7,14 +8,13 @@ config();
 
 const PORT = 5000;
 const app = express();
+app.use(cors());
 
 // allowing support for json post request (! PUT BEFORE ENDPOINTS ↓)
 app.use(express.json());
 
 // API's settup
 app.post("/decks", async (req: Request, res: Response) => {
-  console.log(req.body);
-
   const newDeck = new Deck({
     title: req.body.title,
   });
@@ -22,6 +22,7 @@ app.post("/decks", async (req: Request, res: Response) => {
   res.json(createdDeck);
 });
 
+// GET for "/decks"
 app.get("/decks", async (req, res) => {
   try {
     const decks = await Deck.find();
@@ -33,7 +34,7 @@ app.get("/decks", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Success!");
+  res.send("");
 });
 
 // Database connection
