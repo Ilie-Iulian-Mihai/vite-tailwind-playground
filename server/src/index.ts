@@ -25,7 +25,9 @@ app.post("/decks", async (req: Request, res: Response) => {
 // GET for "/decks"
 app.get("/decks", async (req, res) => {
   try {
+    // fetch all the decks form MongoDB
     const decks = await Deck.find();
+    // send back the array to the UI
     res.json(decks);
   } catch (error) {
     console.error(error);
