@@ -35,6 +35,16 @@ app.get("/decks", async (req, res) => {
   }
 });
 
+//Delete for "/decks"
+app.delete("/decks/:decksId", async (req, res) => {
+  //get the deck ID from the url
+  const deckID = req.params.decksId;
+  //delete the deck from MongoDB
+  const deck = await Deck.findByIdAndDelete(deckID);
+  //return the deleted deck to the user who made the request
+  res.json(deck);
+});
+
 app.get("/", (req, res) => {
   res.send("");
 });

@@ -33,13 +33,22 @@ function App() {
       const newDecks = await response.json();
       setDecks(newDecks);
     })();
-  }, []);
+  }, [decks]);
+
+  const handleDelete = async (deckId: string) => {
+    await fetch(`http://localhost:5000/decks/${deckId}`, {
+      method: "DELETE",
+    });
+  };
 
   return (
     <div className="App">
       <ul className="decks">
         {decks.map((deck) => (
-          <li key={deck._id}>{deck.title}</li>
+          <li key={deck._id}>
+            <button onClick={() => handleDelete(deck._id)}>X</button>
+            {deck.title}
+          </li>
         ))}
       </ul>
       <form className="" onSubmit={handleCreateDeck}>
