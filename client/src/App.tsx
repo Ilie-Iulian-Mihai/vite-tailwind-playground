@@ -55,7 +55,7 @@ function App() {
           </li>
         ))}
       </ul>
-      <form className="" onSubmit={handleCreateDeck}>
+      <form onSubmit={handleCreateDeck}>
         <label htmlFor="deck-title">Deck Title</label>
         <input id="deck-title" value={title} onChange={handleInput} />
         <button>Create Deck</button>
