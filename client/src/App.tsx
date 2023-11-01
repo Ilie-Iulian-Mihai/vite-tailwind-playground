@@ -1,11 +1,7 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import "./App.css";
 import { Link } from "react-router-dom";
-
-type TDeck = {
-  title: string;
-  _id: string;
-};
+import { TDeck, createDeck, deleteDeck, getDecks } from "./api/Decks";
 
 function App() {
   const [decks, setDecks] = useState<TDeck[]>([]);
@@ -17,32 +13,20 @@ function App() {
 
   const handleCreateDeck = async (e: FormEvent) => {
     e.preventDefault();
-
-    const response = await fetch("http://localhost:5000/decks", {
-      method: "POST",
-      body: JSON.stringify({ title }),
-      headers: { "Content-Type": "application/json" },
-    });
-
-    const deck = await response.json(); // Remember that with fetch, we have to to .json()
-
+    const deck = await createDeck(title);
     setDecks([...decks, deck]); // In order for React to rerender arr we have to pass in an arr refference
     setTitle("");
   };
 
   useEffect(() => {
     (async () => {
-      //respons is JSON
-      const response = await fetch("http://localhost:5000/decks");
-      const newDecks = await response.json();
+      const newDecks: TDeck[] = await getDecks();
       setDecks(newDecks);
     })();
   }, []);
 
-  const handleDelete = async (deckId: string) => {
-    await fetch(`http://localhost:5000/decks/${deckId}`, {
-      method: "DELETE",
-    });
+  const handleDeleteDeck = async (deckId: string) => {
+    await deleteDeck(deckId);
     setDecks(decks.filter((deck) => deck._id !== deckId));
   };
 
@@ -51,7 +35,7 @@ function App() {
       <ul className="decks">
         {decks.map((deck) => (
           <li key={deck._id}>
-            <button onClick={() => handleDelete(deck._id)}>X</button>
+            <button onClick={() => handleDeleteDeck(deck._id)}>X</button>
             <Link to={`/decks/${deck._id}`}>{deck.title}</Link>
           </li>
         ))}

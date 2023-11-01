@@ -23,7 +23,7 @@ app.post("/decks", async (req: Request, res: Response) => {
 });
 
 // GET for "/decks"
-app.get("/decks", async (req, res) => {
+app.get("/decks", async (req: Request, res: Response) => {
   try {
     // fetch all the decks form MongoDB
     const decks = await Deck.find();
@@ -36,7 +36,7 @@ app.get("/decks", async (req, res) => {
 });
 
 //Delete for "/decks"
-app.delete("/decks/:decksId", async (req, res) => {
+app.delete("/decks/:decksId", async (req: Request, res: Response) => {
   //get the deck ID from the url
   const deckId = req.params.decksId;
   //delete the deck from MongoDB
@@ -45,9 +45,9 @@ app.delete("/decks/:decksId", async (req, res) => {
   res.json(deck);
 });
 
-app.get("/", (req, res) => {
-  res.send("");
-});
+// app.get("/", (req, res) => {
+//   res.send("");
+// });
 
 // Database connection
 mongoose.connect(process.env.MONGO_URL!).then(() => {
