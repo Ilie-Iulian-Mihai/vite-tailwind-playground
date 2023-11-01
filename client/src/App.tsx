@@ -23,9 +23,9 @@ function App() {
       headers: { "Content-Type": "application/json" },
     });
 
-    const deck = await response.json();
+    const deck = await response.json(); // Remember that with fetch, we have to to .json()
 
-    setDecks([...decks, deck]);
+    setDecks([...decks, deck]); // In order for React to rerender arr we have to pass in an arr refference
     setTitle("");
   };
 
