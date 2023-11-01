@@ -33,7 +33,7 @@ function App() {
       const newDecks = await response.json();
       setDecks(newDecks);
     })();
-  }, [decks]);
+  }, []);
 
   const handleDelete = async (deckId: string) => {
     await fetch(`http://localhost:5000/decks/${deckId}`, {
