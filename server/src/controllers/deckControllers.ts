@@ -24,11 +24,18 @@ export async function postDecks(req: Request, res: Response) {
 }
 
 //DELETE decks
-export async function deleteDecks(req: Request, res: Response) {
-  //get the deck ID from the url
-  const deckId = req.params.decksId;
-  //delete the deck from MongoDB
-  const deck = await Deck.findByIdAndDelete(deckId);
-  //return the deleted deck to the user who made the request
-  res.json(deck);
+export async function deleteDeck(req: Request, res: Response) {
+  try {
+    const deckId = req.params.deckId;
+    const deletedDeck = await Deck.findByIdAndDelete(deckId);
+
+    if (!deletedDeck) {
+      return res.status(404).json({ error: "Deck not found" });
+    }
+
+    res.json(deletedDeck);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 }

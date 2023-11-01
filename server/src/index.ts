@@ -2,7 +2,6 @@ import cors from "cors";
 import { config } from "dotenv";
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
-import Deck from "./models/Deck";
 import deckRoutes from "./routes/deckRoutes";
 
 config();
