@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import "./App.css";
+import { Link } from "react-router-dom";
 
 type TDeck = {
   title: string;
@@ -51,7 +52,7 @@ function App() {
         {decks.map((deck) => (
           <li key={deck._id}>
             <button onClick={() => handleDelete(deck._id)}>X</button>
-            {deck.title}
+            <Link to={`/decks/${deck._id}`}>{deck.title}</Link>
           </li>
         ))}
       </ul>
