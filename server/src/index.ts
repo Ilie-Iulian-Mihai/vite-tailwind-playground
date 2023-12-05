@@ -6,9 +6,10 @@ import deckRoutes from "./routes/deckRoutes";
 
 config();
 
-const PORT = 5000;
 const app = express();
 app.use(cors());
+
+const { PORT, MONGO_URL } = process.env;
 
 // allowing support for json post request (! PUT BEFORE ENDPOINTS ↓)
 app.use(express.json());
@@ -16,7 +17,7 @@ app.use(express.json());
 app.use("/", deckRoutes);
 
 // Database connection
-mongoose.connect(process.env.MONGO_URL!).then(() => {
+mongoose.connect(MONGO_URL!).then(() => {
   console.log(`Connected on port ${PORT}`);
   app.listen(PORT);
 });
