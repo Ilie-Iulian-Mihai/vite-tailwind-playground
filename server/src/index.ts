@@ -11,7 +11,7 @@ app.use(cors());
 
 const { PORT, MONGO_URL } = process.env;
 
-// allowing support for json post request (! PUT BEFORE ENDPOINTS ↓)
+// allowing support for json requests (! PUT BEFORE ENDPOINTS ↓)
 app.use(express.json());
 
 app.use("/", deckRoutes);
