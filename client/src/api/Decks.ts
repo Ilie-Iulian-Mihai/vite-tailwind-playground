@@ -19,7 +19,7 @@ export async function createDeck(title: string) {
     headers: { "Content-Type": "application/json" },
   });
 
-  return response.json(); // Remember that with fetch, we have to to .json()
+  return response.json(); // Remember that with fetch, we have to .json()
 }
 
 export async function getDecks(): Promise<TDeck[]> {
